@@ -28,7 +28,7 @@
       <p>{{ catalog.local_intro|default:service.short_description }}</p>
     </div>
     <div class="detail-image reveal">
-      <img src="{{ service.image.url }}" alt="{{ service.title }} in Darbhanga and Bihar" loading="eager">
+      <img src="{{ service.image_url }}" alt="{{ service.title }} in Darbhanga and Bihar" loading="eager">
     </div>
   </section>
 
@@ -157,7 +157,7 @@
     <div class="related-grid">
       {% for item in related_services %}
         <a class="related-card reveal" href="{{ item.get_absolute_url }}">
-          <img src="{{ item.image.url }}" alt="{{ item.title }}" loading="lazy">
+          <img src="{{ item.image_url }}" alt="{{ item.title }}" loading="lazy">
           <h3>{{ item.title }}</h3>
         </a>
       {% endfor %}

@@ -20,6 +20,16 @@ class Service(models.Model):
     def get_absolute_url(self):
         return reverse("services:service_detail", kwargs={"slug": self.slug})
 
+    @property
+    def image_url(self):
+        if not self.image:
+            return ""
+        val = str(self.image)
+        if val.startswith("services/"):
+            val = val[len("services/"):]
+        from django.templatetags.static import static
+        return static(f"images/services/{val}")
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = self._generate_unique_slug()

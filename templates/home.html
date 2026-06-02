@@ -21,7 +21,7 @@
     {% for service in featured_services %}
       <a class="service-panel reveal" href="{{ service.get_absolute_url }}">
         <span class="panel-index">0{{ forloop.counter }}</span>
-        <img src="{{ service.image.url }}" alt="{{ service.title }}" loading="lazy">
+        <img src="{{ service.image_url }}" alt="{{ service.title }}" loading="lazy">
         <div>
           <h3>{{ service.title }}</h3>
           <p>{{ service.short_description }}</p>

@@ -11,7 +11,7 @@
   {% for service in services %}
     <article class="wide-service reveal">
       <a class="wide-image" href="{{ service.get_absolute_url }}">
-        <img src="{{ service.image.url }}" alt="{{ service.title }}" loading="lazy">
+        <img src="{{ service.image_url }}" alt="{{ service.title }}" loading="lazy">
       </a>
       <div class="wide-copy">
         <span>0{{ forloop.counter }}</span>

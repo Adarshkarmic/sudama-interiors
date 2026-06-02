@@ -6,16 +6,16 @@ def image(path):
     return static(f"images/services/{path}")
 
 def gallery_images(folder):
-    folder_path = os.path.join(
-        "staticfiles",
-        "images",
-        "services",
-        folder
-    )
+    from django.conf import settings
+    # Try static first (source folder), fallback to staticfiles (collected static folder)
+    folder_path = settings.BASE_DIR / "static" / "images" / "services" / folder
+    if not folder_path.exists():
+        folder_path = settings.BASE_DIR / "staticfiles" / "images" / "services" / folder
 
-    if not os.path.exists(folder_path):
+    if not folder_path.exists():
         return []
 
+    import os
     files = sorted(os.listdir(folder_path))
 
     return [
@@ -121,9 +121,9 @@ SERVICE_CATALOG = {
         },
         "materials": [
             {"name": "PVC Ceiling", "what": "A lightweight ceiling panel system.", "used": "Kitchens, bathrooms, utility spaces, and budget-sensitive rooms.", "benefits": "Moisture resistance, quick installation, and easy cleaning.", "durability": "Good in wet and utility zones.", "maintenance": "Very low.", "visual": "Clean and practical.", "pricing": "Budget practical", "images": [image("false-ceiling/false-ceiling_pvc_1.jpeg"), image("false-ceiling/false-ceiling_pvc_2.jpeg")]},
-            {"name": "WPC Ceiling", "what": "A wood-composite ceiling finish.", "used": "Balconies, feature ceilings, warm interior zones, and semi-moist areas.", "benefits": "Wood-like warmth, better moisture handling, and termite resistance.", "durability": "High for interior use.", "maintenance": "Low.", "visual": "Warm, premium, and textured.", "pricing": "Mid-premium", "images": [image("false-ceiling/false-ceiling_wooden_1.jpeg"), image("false-ceiling/false-ceiling_wooden_2.jpeg")]},
-            {"name": "POP Ceiling", "what": "A molded plaster ceiling system.", "used": "Decorative rooms, classical profiles, coves, and custom ceiling curves.", "benefits": "Flexible shaping, elegant detailing, and smooth finish.", "durability": "Good in dry spaces.", "maintenance": "Moderate.", "visual": "Decorative and refined.", "pricing": "Mid-range", "images": [image("false-ceiling/false-ceiling_pop_1.jpeg"), image("false-ceiling/false-ceiling_pop_2.jpg")]},
-            {"name": "Gypsum Ceiling", "what": "A precise board-based ceiling system.", "used": "Modern homes, offices, living rooms, bedrooms, and lighting-led interiors.", "benefits": "Clean lines, fast execution, crisp edges, and premium lighting integration.", "durability": "High in dry interiors.", "maintenance": "Low to moderate.", "visual": "Minimal, elegant, and premium.", "pricing": "Premium practical", "images": [image("false-ceiling/false-ceiling_gypsum_1.jpg"), image("false-ceiling/false-ceiling_gypsum_2.jpg")]},
+            {"name": "WPC Ceiling", "what": "A wood-composite ceiling finish.", "used": "Balconies, feature ceilings, warm interior zones, and semi-moist areas.", "benefits": "Wood-like warmth, better moisture handling, and termite resistance.", "durability": "High for interior use.", "maintenance": "Low.", "visual": "Warm, premium, and textured.", "pricing": "Mid-premium", "images": [image("false-ceiling/false-ceiling_wooden_3.jpeg"), image("false-ceiling/photo_2026-05-12_23-50-05.jpg")]},
+            {"name": "POP Ceiling", "what": "A molded plaster ceiling system.", "used": "Decorative rooms, classical profiles, coves, and custom ceiling curves.", "benefits": "Flexible shaping, elegant detailing, and smooth finish.", "durability": "Good in dry spaces.", "maintenance": "Moderate.", "visual": "Decorative and refined.", "pricing": "Mid-range", "images": [image("false-ceiling/false-ceiling_pop_1.jpeg"), image("false-ceiling/photo_2026-05-12_23-40-28.jpg")]},
+            {"name": "Gypsum Ceiling", "what": "A precise board-based ceiling system.", "used": "Modern homes, offices, living rooms, bedrooms, and lighting-led interiors.", "benefits": "Clean lines, fast execution, crisp edges, and premium lighting integration.", "durability": "High in dry interiors.", "maintenance": "Low to moderate.", "visual": "Minimal, elegant, and premium.", "pricing": "Premium practical", "images": [image("false-ceiling/photo_2026-05-12_23-40-37.jpg"), image("false-ceiling/photo_2026-05-12_23-40-39.jpg")]},
         ],
         "gallery": gallery_images("false-ceiling"),
         "faqs": [
