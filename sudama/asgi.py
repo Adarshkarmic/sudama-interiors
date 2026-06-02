@@ -14,3 +14,10 @@ from django.core.asgi import get_asgi_application
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'sudama.settings')
 
 application = get_asgi_application()
+
+if os.environ.get('VERCEL') == '1':
+    from django.core.management import call_command
+    try:
+        call_command('migrate', interactive=False)
+    except Exception as e:
+        print(f"Error running migrations at startup: {e}")

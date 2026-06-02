@@ -86,12 +86,30 @@ TEMPLATES = [
 WSGI_APPLICATION = 'sudama.wsgi.application'
 
 # DATABASE
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if os.environ.get('VERCEL') == '1':
+    db_path = Path('/tmp/db.sqlite3')
+    original_db = BASE_DIR / 'db.sqlite3'
+    if original_db.exists() and not db_path.exists():
+        import shutil
+        db_path.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(original_db, db_path)
+    elif not db_path.exists():
+        db_path.parent.mkdir(parents=True, exist_ok=True)
+        db_path.touch()
+    
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': db_path,
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 # PASSWORD VALIDATION
 AUTH_PASSWORD_VALIDATORS = [
