@@ -104,11 +104,17 @@ button, input, textarea, select { font: inherit; }
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  color: #17100a;
+  overflow: hidden;
   background: linear-gradient(135deg, #f2d49e, #b77743 54%, #d4b577);
-  font-family: "Cormorant Garamond", serif;
-  font-size: 1.25rem;
   box-shadow: 0 0 28px rgba(201, 155, 90, 0.35);
+  padding: 2px;
+}
+
+.brand-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .brand-copy { color: var(--ink); white-space: nowrap; }

@@ -1,6 +1,9 @@
+{% load static %}
 <header class="site-header" data-nav>
   <a class="brand" href="{% url 'home' %}" aria-label="Sudama Interiors home">
-    <span class="brand-mark">SI</span>
+    <span class="brand-mark">
+      <img src="{% static 'images/logo/logo.jpeg' %}" alt="Sudama Interiors Logo" class="brand-logo-img">
+    </span>
     <span class="brand-copy">Sudama Interiors</span>
   </a>
   <nav class="desktop-nav" aria-label="Primary navigation">
